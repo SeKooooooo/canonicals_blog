@@ -31,6 +31,7 @@ export const Option = (props: OptionProps) => {
 		value,
 		onClick,
 	});
+	console.log(className)
 
 	return (
 		<li

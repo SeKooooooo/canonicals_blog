@@ -4,22 +4,30 @@ import arrow from 'src/images/arrow.svg';
 
 import styles from './ArrowButton.module.scss';
 
-/** Функция для обработки открытия/закрытия формы */
 export type OnClick = () => void;
 
-export const ArrowButton = () => {
+type Props = {
+	isOpenArticle: boolean;
+	setIsOpenArticle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const ArrowButton = ({isOpenArticle, setIsOpenArticle}: Props) => {
+	const handlerClick:OnClick = ()=>{
+		setIsOpenArticle(last => !last)
+	}
+
 	return (
-		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
 			role='button'
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
-			className={styles.container}
+			className={`${styles.container} ${isOpenArticle ? styles['container_open'] : ''}`}
+			onClick={handlerClick}
 		>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
-				className={styles.arrow}
+				className={`${styles.arrow} ${isOpenArticle ? styles['arrow_open'] : ''}`}
 			/>
 		</div>
 	);
